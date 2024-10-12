@@ -6,10 +6,17 @@ contract SafeMath {
     /// @dev Reverts on overflow / underflow.
     function add(int256 lhs, int256 rhs) public pure returns (int256 result) {
         // Convert this to assembly
-        // result = lhs + rhs;
+        result = lhs + rhs;
 
         assembly {
+            // Perform addition
             result := add(lhs, rhs)
+
+            // Check for overflow
+            if sgt(lhs, 0) { if slt(result, lhs) { revert(0, 0) } }
+
+            // Check for underflow
+            if slt(lhs, 0) { if sgt(result, lhs) { revert(0, 0) } }
         }
     }
 
