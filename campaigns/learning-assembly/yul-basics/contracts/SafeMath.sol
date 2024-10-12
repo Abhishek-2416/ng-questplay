@@ -9,14 +9,7 @@ contract SafeMath {
         result = lhs + rhs;
 
         assembly {
-            // Perform addition
             result := add(lhs, rhs)
-
-            // Check for overflow
-            if sgt(lhs, 0) { if slt(result, lhs) { revert(0, 0) } }
-
-            // Check for underflow
-            if slt(lhs, 0) { if sgt(result, lhs) { revert(0, 0) } }
         }
     }
 
