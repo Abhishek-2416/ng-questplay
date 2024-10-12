@@ -12,17 +12,14 @@ abstract contract Challenge {
         bytes memory array
     ) internal pure returns (bytes memory copy) {
         assembly {
-            // Create a new memory array with the same length as the original
-            let length := mload(array) // Load the length of the original array
-            copy := mload(0x40) // Get the free memory pointer
-            mstore(copy, length) // Store the length of the copied array
-            mstore(0x40, add(copy, add(0x20, length))) // Update the free memory pointer
+            let length := mload(array)
+            copy := mload(0x40)
+            mstore(copy, length)
+            mstore(0x40, add(copy, add(0x20, length)))
 
-            // Copy the data from the original array to the new array
-            let dataOffset := add(array, 0x20) // Offset to the start of the data in the original array
-            let copyOffset := add(copy, 0x20) // Offset to the start of the data in the copied array
+            let dataOffset := add(array, 0x20)
+            let copyOffset := add(copy, 0x20)
 
-            // Use a loop to copy each byte
             for {
                 let i := 0
             } lt(i, length) {
