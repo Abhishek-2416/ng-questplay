@@ -19,7 +19,8 @@ contract BitOperators {
         uint256 index
     ) public pure returns (uint256 rvalue) {
         assembly {
-            
+            rvalue := 1
+            rvalue := shl(index, x)
         }
     }
 
