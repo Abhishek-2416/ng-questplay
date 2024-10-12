@@ -37,10 +37,10 @@ contract Comparisons {
     /// @return inRange true if lower <= value <= upper, false otherwise
     function isInRange(int256 value, int256 lower, int256 upper) public pure returns (bool inRange) {
         assembly {
-            let isGreaterOrEqual := or(gt(value, lower), eq(value, lower))
-            let isLesserOrEqual := or(lt(value, upper), eq(value, upper))
+            let isGreaterOrEqual := gt(value, sub(lower, 1))
+            let isLesserOrEqual := lt(value, add(upper, 1))
 
-            inRange := and(isGreaterOrEqual, isLesserOrEqual)
+            inRange := and(isLesserOrEqual, isGreaterOrEqual)
         }
     }
 }
