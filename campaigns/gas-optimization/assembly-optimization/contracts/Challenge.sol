@@ -2,20 +2,19 @@
 pragma solidity ^0.8.19;
 
 abstract contract Challenge {
-
     /**
      * @notice Returns a copy of the given array in a gas efficient way.
      * @dev This contract will be called internally.
      * @param array The array to copy.
      * @return copy The copied array.
      */
-    function copyArray(bytes memory array) 
-        internal 
-        pure 
-        returns (bytes memory copy) 
-    {
+    function copyArray(
+        bytes memory array
+    ) internal pure returns (bytes memory copy) {
+        copy = new bytes(array.length);
 
-         // IMPLEMENT THIS FUNCTION
-
+        for (uint256 i; i < array.length; i++) {
+            copy[i] = array[i];
+        }
     }
 }
